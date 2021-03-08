@@ -27,7 +27,7 @@ public class TwoWayLinkListDeque {
 		theList.removeLastLink();
 	}
 	
-	public void displayDeque() {
+	public void displayTwoWayLinkListDeque() {
 		System.out.print("Дек (от первого к последнему):");
 		theList.displayTwoWayLinkList();
 	}
