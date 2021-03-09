@@ -1,5 +1,5 @@
 /*
- * Класс двустороннего односвязного списка
+ * Дек на двустороннем односвязном списке
  */
 public class TwoWayLinkList {
 	
@@ -36,6 +36,7 @@ public class TwoWayLinkList {
 		lastLink = newLink;
 	}
 	
+	// Предполагает, что дек не пуст
 	public long removeFirstLink() {
 		long tempData = firstLink.data;
 		
@@ -47,6 +48,7 @@ public class TwoWayLinkList {
 		return tempData;
 	}
 	
+	// Предполагает, что дек не пуст
 	public long removeLastLink() {
 		long tempData = lastLink.data;
 		
@@ -70,7 +72,7 @@ public class TwoWayLinkList {
 	}
 	
 	public void displayTwoWayLinkList() {
-		System.out.print("Двусторонний односвязный список: ");
+		System.out.print("Дек на двустороннем односвязном списке: ");
 		
 		Link currentLink = firstLink;
 		while (currentLink != null) {
