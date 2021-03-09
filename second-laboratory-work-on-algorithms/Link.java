@@ -1,11 +1,13 @@
-
+/*
+ * Класс элемента списка
+ */
 public class Link {
 	
 	public Link nextLink;
-	public long data;
+	public int data;
 	
-	public Link(long longData) {
-		data = longData;
+	public Link(int intData) {
+		data = intData;
 		nextLink = null;
 	}
 	

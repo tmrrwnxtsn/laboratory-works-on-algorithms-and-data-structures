@@ -1,4 +1,6 @@
-
+/*
+ * Класс двустороннего односвязного списка
+ */
 public class TwoWayLinkList {
 	
 	private Link firstLink; 
@@ -13,7 +15,7 @@ public class TwoWayLinkList {
 		return firstLink == null;
 	}
 	
-	public void insertToBeginning(long data) {
+	public void insertToBeginning(int data) {
 		Link newLink = new Link(data);
 		
 		if (isEmpty())
@@ -23,7 +25,7 @@ public class TwoWayLinkList {
 		firstLink = newLink;
 	}
 	
-	public void insertToEnd(long data) {
+	public void insertToEnd(int data) {
 		Link newLink = new Link(data);
 
 		if (isEmpty())
@@ -68,7 +70,7 @@ public class TwoWayLinkList {
 	}
 	
 	public void displayTwoWayLinkList() {
-		System.out.println("List (firstLink-->lastLink): ");
+		System.out.print("Двусторонний односвязный список: ");
 		
 		Link currentLink = firstLink;
 		while (currentLink != null) {
