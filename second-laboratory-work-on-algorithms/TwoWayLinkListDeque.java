@@ -33,6 +33,22 @@ public class TwoWayLinkListDeque {
 		}
 	}
 	
+	public void insertLeft(int value) {
+		theTwoWayLinkList.insertToBeginning(value);
+	}
+	
+	public void insertRight(int value) {
+		theTwoWayLinkList.insertToEnd(value);
+	}
+	
+	public void removeLeft() {
+		theTwoWayLinkList.removeFirstLink();
+	}
+	
+	public void removeRight() {
+		theTwoWayLinkList.removeLastLink();
+	}
+	
 	public void display() {
 		theTwoWayLinkList.displayTwoWayLinkList();
 	}
