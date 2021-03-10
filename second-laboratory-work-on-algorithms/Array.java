@@ -19,22 +19,22 @@ public class Array {
 	
 	// Предполагает, что дек не заполнен
 	public void insertToBeginning(int value) {
+		numberElements++;
+		
 		// Циклический перенос
-		if (lastElementIndex == maxArraySize - 1) {
-			theArray[0] = theArray[lastElementIndex];
-			
-			for (int i = lastElementIndex; i > firstElementIndex; i--)
-				theArray[i] = theArray[i - 1];
-			
-			lastElementIndex = 0;
-		}
-		else {
-			for (int i = ++lastElementIndex; i > firstElementIndex; i--)
-				theArray[i] = theArray[i - 1];
+		if (numberElements == 2) {
+			firstElementIndex = theArray.length;
 		}
 		
+		if (firstElementIndex > 0) 
+			firstElementIndex--;
+		else 
+			firstElementIndex = numberElements - 1;
+		
 		theArray[firstElementIndex] = value;
-		numberElements++;
+		
+		if (numberElements == 1)
+			lastElementIndex = firstElementIndex;
 	}
 	
 	// Предполагает, что дек не заполнен
@@ -83,8 +83,7 @@ public class Array {
 	
 	public void display() {
 		System.out.print("Дек на одномерном массиве: ");
-		while (!isEmpty()) {
+		while (!isEmpty()) 
 			System.out.print(removeFromBeginning() + " ");
-		}
 	}
 }
