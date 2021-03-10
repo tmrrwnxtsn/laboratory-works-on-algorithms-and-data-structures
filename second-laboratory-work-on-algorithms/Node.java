@@ -1,17 +1,17 @@
 /*
  * Класс элемента списка
  */
-public class Link {
+public class Node {
 	
-	public Link nextLink;
+	public Node nextNode;
 	public int data;
 	
-	public Link(int intData) {
+	public Node(int intData) {
 		data = intData;
-		nextLink = null;
+		nextNode = null;
 	}
 	
-	public void displayLink() {
+	public void displayNode() {
 		System.out.print(data + " ");
 	}
 }

@@ -22,11 +22,11 @@ public class MainApp {
 		long elapsed = Duration.between(start, finish).toMillis();
 		System.out.println("Дек на массиве, мс: " + elapsed);
 		
-		TwoWayLinkListDeque theTwoWayLinkListDeque = new TwoWayLinkListDeque();
+		TwoWayNodeListDeque theTwoWayNodeListDeque = new TwoWayNodeListDeque();
 		
 		start = Instant.now();
 		
-		theTwoWayLinkListDeque.randomlyFillLeft(numberElements);
+		theTwoWayNodeListDeque.randomlyFillLeft(numberElements);
 		
 		finish = Instant.now();
 		elapsed = Duration.between(start, finish).toMillis();
@@ -45,11 +45,11 @@ public class MainApp {
 		long elapsed = Duration.between(start, finish).toMillis();
 		System.out.println("Дек на массиве, мс: " + elapsed);
 		
-		TwoWayLinkListDeque theTwoWayLinkListDeque = new TwoWayLinkListDeque();
+		TwoWayNodeListDeque theTwoWayNodeListDeque = new TwoWayNodeListDeque();
 		
 		start = Instant.now();
 		
-		theTwoWayLinkListDeque.randomlyFillRight(numberElements);
+		theTwoWayNodeListDeque.randomlyFillRight(numberElements);
 		
 		finish = Instant.now();
 		elapsed = Duration.between(start, finish).toMillis();
@@ -69,12 +69,12 @@ public class MainApp {
 		long elapsed = Duration.between(start, finish).toMillis();
 		System.out.println("Дек на массиве, мс: " + elapsed);
 		
-		TwoWayLinkListDeque theTwoWayLinkListDeque = new TwoWayLinkListDeque();
-		theTwoWayLinkListDeque.randomlyFillRight(numberElements);
+		TwoWayNodeListDeque theTwoWayNodeListDeque = new TwoWayNodeListDeque();
+		theTwoWayNodeListDeque.randomlyFillRight(numberElements);
 		
 		start = Instant.now();
 		
-		theTwoWayLinkListDeque.clearFromLeft();
+		theTwoWayNodeListDeque.clearFromLeft();
 		
 		finish = Instant.now();
 		elapsed = Duration.between(start, finish).toMillis();
@@ -94,12 +94,12 @@ public class MainApp {
 		long elapsed = Duration.between(start, finish).toMillis();
 		System.out.println("Дек на массиве, мс: " + elapsed);
 		
-		TwoWayLinkListDeque theTwoWayLinkListDeque = new TwoWayLinkListDeque();
-		theTwoWayLinkListDeque.randomlyFillRight(numberElements);
+		TwoWayNodeListDeque theTwoWayNodeListDeque = new TwoWayNodeListDeque();
+		theTwoWayNodeListDeque.randomlyFillRight(numberElements);
 		
 		start = Instant.now();
 		
-		theTwoWayLinkListDeque.clearFromRight();
+		theTwoWayNodeListDeque.clearFromRight();
 		
 		finish = Instant.now();
 		elapsed = Duration.between(start, finish).toMillis();
