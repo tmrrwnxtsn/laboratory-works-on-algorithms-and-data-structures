@@ -1,16 +1,14 @@
-import algorithmsWithDifferentComplexity.*;
 import fractionalKnapsakProblem.FractionalKnapsackProblem;
 
 public class MainApp {
 
 	public static void main(String[] args) {
-//		FractionalKnapsackProblem theProblem = new FractionalKnapsackProblem(10);
-//		theProblem.solveProblem();
-//		theProblem.printCurrentProblemState();
+		FractionalKnapsackProblem theProblem = new FractionalKnapsackProblem(10);
+		theProblem.solveProblem();
 		
-		GreedyAlgorithm theProblem = new GreedyAlgorithm(5);
-		System.out.println(theProblem.getArrayOfDigitsToString());
-		System.out.println(theProblem.makeLargestNumber());
+		AlgorithmsWithDifferentComplexity theArray = new AlgorithmsWithDifferentComplexity(5);
+		theArray.makeLargestNumberAlgorithm();
+		theArray.getMinItem();
+		theArray.sortInNonDecreasingOrder();
 	}
-
 }
