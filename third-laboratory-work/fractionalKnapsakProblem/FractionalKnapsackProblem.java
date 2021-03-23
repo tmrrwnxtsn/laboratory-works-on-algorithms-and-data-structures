@@ -1,8 +1,9 @@
+package fractionalKnapsakProblem;
 import java.util.Arrays;
 import java.util.Comparator;
 
 /*
- * Класс задачи о рюкзаке
+ * Класс задачи о рюкзаке.
  */
 public class FractionalKnapsackProblem {
 	
