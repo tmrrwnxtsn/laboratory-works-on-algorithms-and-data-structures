@@ -3,10 +3,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /*
- * Класс задачи о рюкзаке.
+ * Класс задачи о рюкзаке (№1 в л/р).
  */
 public class FractionalKnapsackProblem {
 	
+	private ItemsInKnapsackNodeList theItemsList;
 	private Item[] availableItems;
 	private int knapsackСapacity;
 	private int currentKnapsackWeight;
@@ -15,6 +16,7 @@ public class FractionalKnapsackProblem {
 	
 	public FractionalKnapsackProblem(int itemsNumber) {
 		availableItems = new Item[itemsNumber];
+		theItemsList = new ItemsInKnapsackNodeList();
 		
 		for (int i = 0; i < availableItems.length; i++) {
 			int currentItemWeight = 1 + (int) (Math.random() * availableItems.length);
@@ -37,12 +39,16 @@ public class FractionalKnapsackProblem {
 		while (currentItemIndex < availableItems.length && currentKnapsackWeight != knapsackСapacity) {
 			if (currentKnapsackWeight + availableItems[currentItemIndex].getWeight() < knapsackСapacity) {
 				// Складываем в рюкзак целый предмет
+				theItemsList.addItemInKnapsack(availableItems[currentItemIndex].getWeight(), availableItems[currentItemIndex].getPrice());
 				
 				currentKnapsackPrice += availableItems[currentItemIndex].getPrice();
 				currentKnapsackWeight += availableItems[currentItemIndex].getWeight();
 			}
 			else {
 				// Складываем в рюкзак часть предмета
+				theItemsList.addItemInKnapsack((knapsackСapacity - currentKnapsackWeight), ((knapsackСapacity - currentKnapsackWeight) / 
+						(double) availableItems[currentItemIndex].getWeight()) *
+						availableItems[currentItemIndex].getPrice());
 				
 				currentKnapsackPrice += ((knapsackСapacity - currentKnapsackWeight) / 
 						(double) availableItems[currentItemIndex].getWeight()) *
@@ -54,7 +60,7 @@ public class FractionalKnapsackProblem {
 		}
 	}
 	
-	private String getAvailableItemsToStrig() {
+	private String getAvailableItemsToString() {
 		String result = "";
 		
 		for (int i = 0; i < availableItems.length - 1; i++) {
@@ -65,14 +71,19 @@ public class FractionalKnapsackProblem {
 		return result;
 	}
 	
+	private String getItemsInKnapsackToString() {
+		return theItemsList.toString();
+	}
+	
 	public void printCurrentProblemState() {
 		System.out.println("Вместимость рюкзака: " + knapsackСapacity);
 		if (!(currentKnapsackPrice == 0)) {
-			System.out.println("Предметы, которые можно положить в рюкзак, отсортированные в порядке убывания удельной стоимости:\n" + getAvailableItemsToStrig());
-			System.out.println("Наилучшая цена набора вещей при данной вместимости и данных доступных предметах: " + Math.round(currentKnapsackPrice));
+			System.out.println("Предметы, которые можно положить в рюкзак, отсортированные в порядке убывания удельной стоимости:\n" + getAvailableItemsToString());
+			System.out.println("Наилучший набор вещей, который был выбран жадным алгоритмом и сложен в рюкзак:\n" + getItemsInKnapsackToString());
+			System.out.println("Цена этого набора вещей при данной вместимости и данных доступных предметах: " + currentKnapsackPrice);
 		}
 		else {
-			System.out.println("Предметы, которые можно положить в рюкзак:\n" + getAvailableItemsToStrig());
+			System.out.println("Предметы, которые можно положить в рюкзак:\n" + getAvailableItemsToString());
 		}
 	}
 	

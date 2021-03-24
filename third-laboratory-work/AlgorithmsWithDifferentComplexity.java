@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 /*
- * Класс-аккумулят алгоритмов с различной сложностью.
+ * Класс-аккумулят алгоритмов с различной сложностью (№3 в л/р).
  */
 public class AlgorithmsWithDifferentComplexity {
 	
