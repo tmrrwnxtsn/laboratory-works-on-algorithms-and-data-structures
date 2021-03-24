@@ -40,7 +40,7 @@ public class AlgorithmsWithDifferentComplexity {
 	
 	/*
 	 * Задача, которую решает алгоритм: необходимо найти минимальный элемент в неотсортированном массиве.
-	 * Сложность алгоритма: Θ(N). 
+	 * Сложность алгоритма: O(N). 
 	 */
 	public int getMinItem() {
 		int min = arrayOfDigits[0];
@@ -53,7 +53,7 @@ public class AlgorithmsWithDifferentComplexity {
 	
 	/*
 	 * Задача, которую решает алгоритм: необходимо отсортировать неотсортированный массив в порядке неубывания.
-	 * Сложность алгоритма: Θ(N^2). 
+	 * Сложность алгоритма: O(N^2). 
 	 */
 	public void sortInNonDecreasingOrder() {
         for (int out = arrayOfDigits.length - 1; out >= 1; out--) {
