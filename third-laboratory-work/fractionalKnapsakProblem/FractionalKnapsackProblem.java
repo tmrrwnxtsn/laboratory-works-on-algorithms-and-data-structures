@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /*
- * Класс задачи о рюкзаке (№1 в л/р).
+ * Класс задачи о рюкзаке (№1 в л/р). Решение с помощью жадного алгоритма.
  */
 public class FractionalKnapsackProblem {
 	
