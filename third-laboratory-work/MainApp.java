@@ -8,7 +8,6 @@ public class MainApp {
 	public static void main(String[] args) {
 		measureTimeOfMyAlgorithms(10);
 		System.out.println(getCirtainFibonacciNumber(10));
-		
 	}
 	
 	public static void measureTimeOfKnapsackProblemSolution(int numberElements) {
