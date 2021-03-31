@@ -6,13 +6,13 @@ import fractionalKnapsakProblem.FractionalKnapsackProblem;
 public class MainApp {
 
 	public static void main(String[] args) {
-		measureTimeOfMyAlgorithms(10);
-		System.out.println(getCirtainFibonacciNumber(10));
+		measureTimeOfMyAlgorithms(100000);
 	}
 	
 	public static void measureTimeOfKnapsackProblemSolution(int numberElements) {
 		FractionalKnapsackProblem theProblem = new FractionalKnapsackProblem(numberElements);
 		
+		// Измерение времени для реализации решения задачи о рюкзаке с помощью жадного алгоритма
 		Instant start = Instant.now();
 		
 		theProblem.solveProblem();
@@ -61,16 +61,6 @@ public class MainApp {
 		System.out.println("Пузырьковая сортировка в порядке неубывания неупорядоченного массива из " + numberElements + " элементов занимает " + elapsed +" мс.");
 	}
 	
-	public static void measureTimeOfMyAlgorithms(int numberElements) {
-		measureTimeOfKnapsackProblemSolution(numberElements);
-		System.out.println();
-		measureTimeOfSortInNonDecreasingOrderAlgorithm(numberElements);
-		System.out.println();
-		measureTimeOfMakeLargestNumberAlgorithm(numberElements);
-		System.out.println();
-		measureTimeOfGetMinItemAlgorithm(numberElements);
-	}
-	
 	/*
 	 * №2* в л/р.
 	 * Задача, которую решает алгоритм: необходимо найти число Фибоначчи на данной позиции, используя динамическое программирование.
@@ -91,5 +81,29 @@ public class MainApp {
 			
 			return fibonacciNumbers[fibNumberPosition - 1];
 		}
+	}
+	
+	public static void measureTimeOfSearchingCirtainFibonacciNumber(int fibNumberPosition) {
+		// Измерение времени для поиска n-ного числа Фибоначчи
+		Instant start = Instant.now();
+						
+		getCirtainFibonacciNumber(fibNumberPosition);
+		
+		Instant finish = Instant.now();
+		long elapsed = Duration.between(start, finish).toMillis();
+		System.out.println("Поиск " + fibNumberPosition + "-ого числа Фибоначчи занимает " + elapsed +" мс.");
+			
+	}
+	
+	public static void measureTimeOfMyAlgorithms(int numberElements) {
+		measureTimeOfKnapsackProblemSolution(numberElements);
+		System.out.println();
+		measureTimeOfSortInNonDecreasingOrderAlgorithm(numberElements);
+		System.out.println();
+		measureTimeOfMakeLargestNumberAlgorithm(numberElements);
+		System.out.println();
+		measureTimeOfGetMinItemAlgorithm(numberElements);
+		System.out.println();
+		measureTimeOfSearchingCirtainFibonacciNumber(numberElements);
 	}
 }
