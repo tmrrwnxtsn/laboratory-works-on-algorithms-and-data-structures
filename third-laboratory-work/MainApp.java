@@ -6,7 +6,9 @@ import fractionalKnapsakProblem.FractionalKnapsackProblem;
 public class MainApp {
 
 	public static void main(String[] args) {
-		measureTimeOfMyAlgorithms(100000);
+		measureTimeOfMyAlgorithms(10);
+		System.out.println(getCirtainFibonacciNumber(10));
+		
 	}
 	
 	public static void measureTimeOfKnapsackProblemSolution(int numberElements) {
@@ -68,5 +70,27 @@ public class MainApp {
 		measureTimeOfMakeLargestNumberAlgorithm(numberElements);
 		System.out.println();
 		measureTimeOfGetMinItemAlgorithm(numberElements);
+	}
+	
+	/*
+	 * №2* в л/р.
+	 * Задача, которую решает алгоритм: необходимо найти число Фибоначчи на данной позиции.
+	 * Сложность алгоритма: O(N)
+	 */
+	public static int getCirtainFibonacciNumber(int fibNumberPosition) {
+		if (fibNumberPosition == 1 || fibNumberPosition == 2) {
+			return 1;
+		}
+		else {
+			int[] fibonacciNumbers = new int[fibNumberPosition];
+			
+			fibonacciNumbers[0] = 1;
+			fibonacciNumbers[1] = 1;
+			
+			for (int i = 2; i < fibNumberPosition; i++)
+				fibonacciNumbers[i] = fibonacciNumbers[i - 1] + fibonacciNumbers[i - 2];
+			
+			return fibonacciNumbers[fibNumberPosition - 1];
+		}
 	}
 }
