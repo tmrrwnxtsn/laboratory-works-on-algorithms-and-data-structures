@@ -6,10 +6,10 @@ import fractionalKnapsakProblem.FractionalKnapsackProblem;
 public class MainApp {
 
 	public static void main(String[] args) {
-		solveFractionalKnapsackProblem(10);
+		measureTimeOfKnapsackProblemSolution(10);
 	}
 	
-	public static void solveFractionalKnapsackProblem(int numberElements) {
+	public static void measureTimeOfKnapsackProblemSolution(int numberElements) {
 		FractionalKnapsackProblem theProblem = new FractionalKnapsackProblem(numberElements);
 		
 		Instant start = Instant.now();
@@ -19,5 +19,38 @@ public class MainApp {
 		Instant finish = Instant.now();
 		long elapsed = Duration.between(start, finish).toMillis();
 		System.out.println("Решение задачи о рюкзаке для " + numberElements + " элементов занимает " + elapsed +" мс.");
+	}
+	
+	public static void measureTimeOfDifferentAlgorithms(int numberElements) {
+		AlgorithmsWithDifferentComplexity theAnalyzedArray = new AlgorithmsWithDifferentComplexity(numberElements);
+		
+		// Измерение времени для 1-го алгоритма (O(N * logN))
+		Instant start = Instant.now();
+		
+		theAnalyzedArray.makeLargestNumberAlgorithm();
+		
+		Instant finish = Instant.now();
+		long elapsed = Duration.between(start, finish).toMillis();
+		System.out.println("Составление наибольшего числа из цифр неупорядоченного массива из " + numberElements + " элементов занимает " + elapsed +" мс.");
+		
+		// Измерение времени для 2-го алгоритма (O(N))
+		start = Instant.now();
+		
+		theAnalyzedArray.getMinItem();
+		
+		finish = Instant.now();
+		elapsed = Duration.between(start, finish).toMillis();
+		System.out.println("Поиск минимального элемента в неупорядоченном массиве из " + numberElements + " элементов занимает " + elapsed +" мс.");
+		
+		// Измерение времени для 3-го алгоритма (O(N^2))
+		start = Instant.now();
+		
+		theAnalyzedArray.sortInNonDecreasingOrder();
+		
+		finish = Instant.now();
+		elapsed = Duration.between(start, finish).toMillis();
+		System.out.println("Пузырьковая сортировка в порядке неубывания неупорядоченного массива из " + numberElements + " элементов занимает " + elapsed +" мс.");
+			
+	
 	}
 }
