@@ -5,8 +5,8 @@
 3. Реализовать 3 алгоритма с разной сложностью и дать корректные оценки алгоритмам.
 
 Описание исходного кода:
-| Номер задачи | Файлы с её решением |
+| Номер задачи | Файлы/папки, содержащие её решение |
 |----:|:----|
-| 1 | + FractionalKnapsackProblem.java + Item.java + ItemsInKnapsackNodeList.java + Node.java |
+| 1 | fractionalKnapsackProblem |
 | 2 | MainApp.java |
 | 3 | AlhorithmsWithDifferentComplexity.java |
