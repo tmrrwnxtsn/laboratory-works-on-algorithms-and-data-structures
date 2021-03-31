@@ -7,10 +7,6 @@
 Описание исходного кода:
 | Номер задачи | Файлы с её решением |
 |----:|:----|
-| 1 |
-+ FractionalKnapsackProblem.java
-+ Item.java
-+ ItemsInKnapsackNodeList.java
-+ Node.java |
+| 1 | + FractionalKnapsackProblem.java + Item.java + ItemsInKnapsackNodeList.java + Node.java |
 | 2 | MainApp.java |
 | 3 | AlhorithmsWithDifferentComplexity.java |
