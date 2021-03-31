@@ -8,5 +8,5 @@
 | Номер задачи | Файлы/папки, содержащие её решение |
 |----:|:----|
 | 1 | fractionalKnapsackProblem |
-| 2 | MainApp.java |
+| 2 | MainApp.java (getCirtainFibonacciNumber(...)) |
 | 3 | AlhorithmsWithDifferentComplexity.java |
