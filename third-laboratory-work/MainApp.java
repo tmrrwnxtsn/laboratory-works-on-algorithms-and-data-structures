@@ -6,7 +6,7 @@ import fractionalKnapsakProblem.FractionalKnapsackProblem;
 public class MainApp {
 
 	public static void main(String[] args) {
-		measureTimeOfKnapsackProblemSolution(10);
+		measureTimeOfMyAlgorithms(100000);
 	}
 	
 	public static void measureTimeOfKnapsackProblemSolution(int numberElements) {
@@ -21,7 +21,7 @@ public class MainApp {
 		System.out.println("Решение задачи о рюкзаке для " + numberElements + " элементов занимает " + elapsed +" мс.");
 	}
 	
-	public static void measureTimeOfDifferentAlgorithms(int numberElements) {
+	public static void measureTimeOfMakeLargestNumberAlgorithm(int numberElements) {
 		AlgorithmsWithDifferentComplexity theAnalyzedArray = new AlgorithmsWithDifferentComplexity(numberElements);
 		
 		// Измерение времени для 1-го алгоритма (O(N * logN))
@@ -32,25 +32,41 @@ public class MainApp {
 		Instant finish = Instant.now();
 		long elapsed = Duration.between(start, finish).toMillis();
 		System.out.println("Составление наибольшего числа из цифр неупорядоченного массива из " + numberElements + " элементов занимает " + elapsed +" мс.");
+	}
+	
+	public static void measureTimeOfGetMinItemAlgorithm(int numberElements) {
+		AlgorithmsWithDifferentComplexity theAnalyzedArray = new AlgorithmsWithDifferentComplexity(numberElements);
 		
 		// Измерение времени для 2-го алгоритма (O(N))
-		start = Instant.now();
+		Instant start = Instant.now();
 		
 		theAnalyzedArray.getMinItem();
 		
-		finish = Instant.now();
-		elapsed = Duration.between(start, finish).toMillis();
-		System.out.println("Поиск минимального элемента в неупорядоченном массиве из " + numberElements + " элементов занимает " + elapsed +" мс.");
+		Instant finish = Instant.now();
+		long elapsed = Duration.between(start, finish).toMillis();
+		System.out.println("Поиск минимального элемента в неупорядоченном массиве из " + numberElements + " элементов занимает " + elapsed +" мс.");		
+	}
+	
+	public static void measureTimeOfSortInNonDecreasingOrderAlgorithm(int numberElements) {
+		AlgorithmsWithDifferentComplexity theAnalyzedArray = new AlgorithmsWithDifferentComplexity(numberElements);
 		
 		// Измерение времени для 3-го алгоритма (O(N^2))
-		start = Instant.now();
-		
+		Instant start = Instant.now();
+				
 		theAnalyzedArray.sortInNonDecreasingOrder();
-		
-		finish = Instant.now();
-		elapsed = Duration.between(start, finish).toMillis();
+				
+		Instant finish = Instant.now();
+		long elapsed = Duration.between(start, finish).toMillis();
 		System.out.println("Пузырьковая сортировка в порядке неубывания неупорядоченного массива из " + numberElements + " элементов занимает " + elapsed +" мс.");
-			
+	}
 	
+	public static void measureTimeOfMyAlgorithms(int numberElements) {
+		measureTimeOfKnapsackProblemSolution(numberElements);
+		System.out.println();
+		measureTimeOfSortInNonDecreasingOrderAlgorithm(numberElements);
+		System.out.println();
+		measureTimeOfMakeLargestNumberAlgorithm(numberElements);
+		System.out.println();
+		measureTimeOfGetMinItemAlgorithm(numberElements);
 	}
 }

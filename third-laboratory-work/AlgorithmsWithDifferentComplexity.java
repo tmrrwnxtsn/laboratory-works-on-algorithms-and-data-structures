@@ -28,14 +28,14 @@ public class AlgorithmsWithDifferentComplexity {
 	 * Сложность алгоритма: O(N * logN) + O(N) = O(N * logN).
 	 */
 	public String makeLargestNumberAlgorithm() {
-		String result = "";
+		StringBuilder sb = new StringBuilder();
 		
 		Arrays.sort(arrayOfDigits);
 		
 		for (int i = arrayOfDigits.length - 1; i >= 0; i--)
-			result += arrayOfDigits[i];
+			sb.append(arrayOfDigits[i]);
 		
-		return result;
+		return sb.toString();
 	}
 	
 	/*
