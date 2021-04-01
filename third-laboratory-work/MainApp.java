@@ -6,7 +6,7 @@ import fractionalKnapsakProblem.FractionalKnapsackProblem;
 public class MainApp {
 
 	public static void main(String[] args) {
-		measureTimeOfMyAlgorithms(100000);
+		measureTimeOfMyAlgorithms(1000000);
 	}
 	
 	public static void measureTimeOfKnapsackProblemSolution(int numberElements) {
@@ -91,8 +91,7 @@ public class MainApp {
 		
 		Instant finish = Instant.now();
 		long elapsed = Duration.between(start, finish).toMillis();
-		System.out.println("Поиск " + fibNumberPosition + "-ого числа Фибоначчи занимает " + elapsed +" мс.");
-			
+		System.out.println("Поиск " + fibNumberPosition + "-ого числа Фибоначчи занимает " + elapsed +" мс.");	
 	}
 	
 	public static void measureTimeOfMyAlgorithms(int numberElements) {
@@ -107,3 +106,4 @@ public class MainApp {
 		measureTimeOfSearchingCirtainFibonacciNumber(numberElements);
 	}
 }
+
