@@ -22,13 +22,13 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 	}
 
 	@Override
-	public void insertNode(int key, T value) {
+	public boolean insertNode(int key, T value) {
 		
 		MyBinarySearchTreeNode<T> newNode = new MyBinarySearchTreeNode<T>(key, value);
 		
 		if (isTreeEmpty()) {
 			root = newNode;
-			return;
+			return true;
 		}
 			
 		MyBinarySearchTreeNode<T> currentNode = root;
@@ -39,15 +39,19 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 				currentNode = currentNode.getLeftChildNode();
 				if (currentNode == null) {
 					parentOfCurrentNode.setLeftChildNode(newNode);
-					return;
+					return true;
 				}
 			}
 			else {
-				currentNode = currentNode.getRightChildNode();
-				if (currentNode == null) {
-					parentOfCurrentNode.setRightChildNode(newNode);
-					return;
+				if (key > currentNode.getKey()) {
+					currentNode = currentNode.getRightChildNode();
+					if (currentNode == null) {
+						parentOfCurrentNode.setRightChildNode(newNode);
+						return true;
+					}
 				}
+				else
+					return false;
 			}
 			parentOfCurrentNode = currentNode;
 		}

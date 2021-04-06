@@ -3,7 +3,7 @@
  */
 public interface IBinarySearchTree<T> {
 	MyBinarySearchTreeNode<T> findNode(int key);
-	void insertNode(int key, T value);
+	boolean insertNode(int key, T value);
 	boolean removeNode(int key);
 	boolean isTreeEmpty();
 }
