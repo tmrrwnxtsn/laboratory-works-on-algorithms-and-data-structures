@@ -1,7 +1,9 @@
 
 public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 
-	public MyBinarySearchTreeNode<T> root;
+	private MyBinarySearchTreeNode<T> root;
+	
+	public MyBinarySearchTreeNode<T> getRoot() {return root;}
 
 	@Override
 	public MyBinarySearchTreeNode<T> findNode(int key) {
@@ -169,28 +171,31 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 	@Override
 	public boolean isTreeEmpty() {return root == null;}
 	
-	private void traversePreOrder(MyBinarySearchTreeNode<T> localRoot) {
-		if (localRoot != null) {
-			System.out.print(localRoot.getData() + " ");
-			traversePreOrder(localRoot.getLeftChildNode());
-			traversePreOrder(localRoot.getRightChildNode());
+	@Override
+	public void traversePreOrder(MyBinarySearchTreeNode<T> root) {
+		if (root != null) {
+			System.out.print(root.getData() + " ");
+			traversePreOrder(root.getLeftChildNode());
+			traversePreOrder(root.getRightChildNode());
 		}
 	 }
 	
-	 private void traverseInOrder(MyBinarySearchTreeNode<T> localRoot) {
-		 if (localRoot != null) {
-			 traverseInOrder(localRoot.getLeftChildNode());
-			 System.out.print(localRoot.getData() + " ");
-			 traverseInOrder(localRoot.getRightChildNode());
-		 }
+	@Override
+	public void traverseInOrder(MyBinarySearchTreeNode<T> root) {
+		if (root != null) {
+			 traverseInOrder(root.getLeftChildNode());
+			 System.out.print(root.getData() + " ");
+			 traverseInOrder(root.getRightChildNode());
+		}
 	 }
-	 
-	 private void traversePostOrder(MyBinarySearchTreeNode<T> localRoot) {
-		 if (localRoot != null) {
-			 traversePostOrder(localRoot.getLeftChildNode());
-			 traversePostOrder(localRoot.getRightChildNode());
-			 System.out.print(localRoot.getData() + " ");
-		 }
+
+	@Override
+	public void traversePostOrder(MyBinarySearchTreeNode<T> root) {
+		if (root != null) {
+			 traversePostOrder(root.getLeftChildNode());
+			 traversePostOrder(root.getRightChildNode());
+			 System.out.print(root.getData() + " ");
+		}
 	 }
 	 
 	 public void traverse(int traverseType) {
@@ -209,4 +214,6 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 			 break;
 		 }
 	 }
+
+
 }
