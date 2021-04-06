@@ -53,7 +53,8 @@ public class TreeApp {
 				System.out.print("Введите ключ: ");
 				key = getInt();
 				boolean a = theTree.removeNode(key);
-				System.out.println(a);
+				System.out.println("Статус удаления:");
+				System.out.print(a);
 				break;
 			}
 			System.out.println();

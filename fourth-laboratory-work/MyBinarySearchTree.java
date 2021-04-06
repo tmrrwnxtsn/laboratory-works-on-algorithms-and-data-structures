@@ -235,7 +235,7 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 			 while (globalStack.isEmpty() == false) {
 				 MyBinarySearchTreeNode<T> temp = (MyBinarySearchTreeNode<T>) globalStack.pop();
 				 if (temp != null) {
-					 sb.append(temp.toString());
+					 sb.append(temp.getData());
 					 localStack.push(temp.getLeftChildNode());
 					 localStack.push(temp.getRightChildNode());
 					 if (temp.getLeftChildNode() != null || temp.getRightChildNode() != null)
