@@ -22,4 +22,15 @@ public class MyBinarySearchTreeNode<T> {
 	public MyBinarySearchTreeNode<T> getRightChildNode() {return rightChildNode;}
 	
 	public void setRightChildNode(MyBinarySearchTreeNode<T> rightChildNode) {this.rightChildNode = rightChildNode;}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		sb.append(key);
+		sb.append(", ");
+		sb.append(data);
+		sb.append("}");
+		return sb.toString();
+	}
 }

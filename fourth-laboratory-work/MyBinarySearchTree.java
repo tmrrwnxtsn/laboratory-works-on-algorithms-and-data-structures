@@ -1,7 +1,7 @@
 
 public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 
-	private MyBinarySearchTreeNode<T> root;
+	public MyBinarySearchTreeNode<T> root;
 
 	@Override
 	public MyBinarySearchTreeNode<T> findNode(int key) {
@@ -20,7 +20,10 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 		}
 		return currentNode;
 	}
-
+	
+	/*
+	 * Возвращает true, если удалось вставить узел, иначе - false.
+	 */
 	@Override
 	public boolean insertNode(int key, T value) {
 		
@@ -165,4 +168,45 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 
 	@Override
 	public boolean isTreeEmpty() {return root == null;}
+	
+	private void traversePreOrder(MyBinarySearchTreeNode<T> localRoot) {
+		if (localRoot != null) {
+			System.out.print(localRoot.getData() + " ");
+			traversePreOrder(localRoot.getLeftChildNode());
+			traversePreOrder(localRoot.getRightChildNode());
+		}
+	 }
+	
+	 private void traverseInOrder(MyBinarySearchTreeNode<T> localRoot) {
+		 if (localRoot != null) {
+			 traverseInOrder(localRoot.getLeftChildNode());
+			 System.out.print(localRoot.getData() + " ");
+			 traverseInOrder(localRoot.getRightChildNode());
+		 }
+	 }
+	 
+	 private void traversePostOrder(MyBinarySearchTreeNode<T> localRoot) {
+		 if (localRoot != null) {
+			 traversePostOrder(localRoot.getLeftChildNode());
+			 traversePostOrder(localRoot.getRightChildNode());
+			 System.out.print(localRoot.getData() + " ");
+		 }
+	 }
+	 
+	 public void traverse(int traverseType) {
+		 switch (traverseType) {
+		 case 1: 
+			 System.out.print("\nПрямой обход (вершина, левое поддерево, правое поддерево): ");
+			 traversePreOrder(root);
+			 break;
+		 case 2: 
+			 System.out.print("\nСимметричный обход (левое поддерево, вершина, правое поддерево): ");
+			 traverseInOrder(root);
+			 break;
+		 case 3: 
+			 System.out.print("\nОбратный обход (левое поддерево, правое поддерево, вершина): ");
+			 traversePostOrder(root);
+			 break;
+		 }
+	 }
 }
