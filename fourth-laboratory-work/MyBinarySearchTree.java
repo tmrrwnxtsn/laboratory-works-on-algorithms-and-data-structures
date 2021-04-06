@@ -74,7 +74,9 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 				currentNode = currentNode.getRightChildNode();
 				isCurrentNodeRightChild = true;
 			}
-			if (currentNode == null) {return false;} // Узел не найден
+			
+			// Узел не найден
+			if (currentNode == null) {return false;}
 			
 			parentOfCurrentNode = currentNode;
 		}
@@ -114,10 +116,47 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 							parentOfCurrentNode.setLeftChildNode(currentNode.getRightChildNode());
 					}
 				}
+				else {
+					// У найденного узла 2 потомка, заменяем найденный узел преемником
+					MyBinarySearchTreeNode<T> successorNode = getSuccessor(currentNode);
+					
+					if (currentNode == root)
+						root = successorNode;
+					else {
+						if (isCurrentNodeRightChild)
+							parentOfCurrentNode.setRightChildNode(successorNode);
+						else
+							parentOfCurrentNode.setLeftChildNode(successorNode);
+					}
+					
+					successorNode.setLeftChildNode(currentNode.getLeftChildNode());
+				}
 			}
 		}
-		
 		return true;
+	}
+	
+	/*
+	 * Метод поиска преемника удаляемого узла (узел со следующим по величине ключом), которым будет заменяться узел с 2 потомками.
+	 */
+	private MyBinarySearchTreeNode<T> getSuccessor(MyBinarySearchTreeNode<T> removingNode) {
+		
+		MyBinarySearchTreeNode<T> successorParrentNode = removingNode;
+		MyBinarySearchTreeNode<T> successorNode = removingNode;
+		MyBinarySearchTreeNode<T> currentNode = removingNode.getRightChildNode();
+		
+		while (currentNode != null) {
+			successorParrentNode = successorNode;
+			successorNode = currentNode;
+			currentNode = currentNode.getLeftChildNode();
+		}
+		
+		if (successorNode != removingNode.getRightChildNode()) {
+			successorParrentNode.setLeftChildNode(successorNode.getRightChildNode());
+			successorNode.setRightChildNode(removingNode.getRightChildNode());
+		}
+		
+		return successorNode;
 	}
 
 	@Override
