@@ -1,4 +1,6 @@
-
+/*
+ * Класс узла бинарного дерева поиска.
+ */
 public class MyBinarySearchTreeNode<T> {
 	
 	private int key;

@@ -1,4 +1,8 @@
+import java.util.Stack;
 
+/*
+ * Класс, реализующий интерфейс бинарного дерева поиска.
+ */
 public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 
 	private MyBinarySearchTreeNode<T> root;
@@ -71,23 +75,23 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 		if (isTreeEmpty()) {return false;}
 		
 		MyBinarySearchTreeNode<T> currentNode = root;
-		MyBinarySearchTreeNode<T> parentOfCurrentNode = currentNode;
+		MyBinarySearchTreeNode<T> parentOfCurrentNode = root;
 		boolean isCurrentNodeRightChild = true;
 		
 		while (currentNode.getKey() != key) {
-			if (currentNode.getKey() < key) {
-				currentNode = currentNode.getLeftChildNode();
+			parentOfCurrentNode = currentNode;
+			
+			if (key < currentNode.getKey()) {
 				isCurrentNodeRightChild = false;
+				currentNode = currentNode.getLeftChildNode();
 			}
 			else {
-				currentNode = currentNode.getRightChildNode();
 				isCurrentNodeRightChild = true;
+				currentNode = currentNode.getRightChildNode();
 			}
 			
 			// Узел не найден
 			if (currentNode == null) {return false;}
-			
-			parentOfCurrentNode = currentNode;
 		}
 		
 		// Если у найденного узла нет потомков
@@ -213,7 +217,45 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 			 traversePostOrder(root);
 			 break;
 		 }
+		 System.out.println();
 	 }
-
-
+	 
+	 @Override
+	 public String toString() {
+		 StringBuilder sb = new StringBuilder("_________________________________________________________________\n\n");
+		 Stack<MyBinarySearchTreeNode<T>> globalStack = new Stack<MyBinarySearchTreeNode<T>>();
+		 globalStack.push(root);
+		 int nBlanks = 32;
+		 boolean isRowEmpty = false;
+		 while (isRowEmpty == false) {
+			 Stack<MyBinarySearchTreeNode<T>> localStack = new Stack<MyBinarySearchTreeNode<T>>();
+			 isRowEmpty = true;
+			 for (int j = 0; j < nBlanks; j++)
+				 sb.append(' ');
+			 while (globalStack.isEmpty() == false) {
+				 MyBinarySearchTreeNode<T> temp = (MyBinarySearchTreeNode<T>) globalStack.pop();
+				 if (temp != null) {
+					 sb.append(temp.toString());
+					 localStack.push(temp.getLeftChildNode());
+					 localStack.push(temp.getRightChildNode());
+					 if (temp.getLeftChildNode() != null || temp.getRightChildNode() != null)
+						 isRowEmpty = false;
+				 }
+				 else {
+					 sb.append("--");
+					 localStack.push(null);
+					 localStack.push(null);
+				 }
+				 for (int j = 0; j < nBlanks * 2 - 2; j++)
+					 sb.append(' ');
+			 }
+			 sb.append("\n");
+			 nBlanks /= 2;
+			 while (localStack.isEmpty() == false)
+				 globalStack.push(localStack.pop());
+			 }
+		 sb.append("\n_________________________________________________________________");
+		 return sb.toString();
+	}
 }
+
