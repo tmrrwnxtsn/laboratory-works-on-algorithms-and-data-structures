@@ -3,18 +3,16 @@ import java.util.Stack;
 /*
  * Класс, реализующий интерфейс бинарного дерева поиска.
  */
-public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
+public class MyBinaryTree<T> implements IBinaryTree<T> {
 
-	private MyBinarySearchTreeNode<T> root;
-	
-	public MyBinarySearchTreeNode<T> getRoot() {return root;}
+	private MyBinaryTreeNode<T> root;
 
 	@Override
-	public MyBinarySearchTreeNode<T> findNode(int key) {
+	public MyBinaryTreeNode<T> findNode(int key) {
 		
 		if (isTreeEmpty()) {return null;}
 		
-		MyBinarySearchTreeNode<T> currentNode = root;
+		MyBinaryTreeNode<T> currentNode = root;
 		
 		while (currentNode.getKey() != key) {
 			if (key < currentNode.getKey())
@@ -33,15 +31,15 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 	@Override
 	public boolean insertNode(int key, T value) {
 		
-		MyBinarySearchTreeNode<T> newNode = new MyBinarySearchTreeNode<T>(key, value);
+		MyBinaryTreeNode<T> newNode = new MyBinaryTreeNode<T>(key, value);
 		
 		if (isTreeEmpty()) {
 			root = newNode;
 			return true;
 		}
 			
-		MyBinarySearchTreeNode<T> currentNode = root;
-		MyBinarySearchTreeNode<T> parentOfCurrentNode = currentNode;
+		MyBinaryTreeNode<T> currentNode = root;
+		MyBinaryTreeNode<T> parentOfCurrentNode = currentNode;
 		
 		while (true) {
 			if (key < currentNode.getKey()) {
@@ -74,8 +72,8 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 		
 		if (isTreeEmpty()) {return false;}
 		
-		MyBinarySearchTreeNode<T> currentNode = root;
-		MyBinarySearchTreeNode<T> parentOfCurrentNode = root;
+		MyBinaryTreeNode<T> currentNode = root;
+		MyBinaryTreeNode<T> parentOfCurrentNode = root;
 		boolean isCurrentNodeRightChild = true;
 		
 		while (currentNode.getKey() != key) {
@@ -131,7 +129,7 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 				}
 				else {
 					// У найденного узла 2 потомка, заменяем найденный узел преемником
-					MyBinarySearchTreeNode<T> successorNode = getSuccessor(currentNode);
+					MyBinaryTreeNode<T> successorNode = getSuccessor(currentNode);
 					
 					if (currentNode == root)
 						root = successorNode;
@@ -152,11 +150,11 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 	/*
 	 * Метод поиска преемника удаляемого узла (узел со следующим по величине ключом), которым будет заменяться узел с 2 потомками.
 	 */
-	private MyBinarySearchTreeNode<T> getSuccessor(MyBinarySearchTreeNode<T> removingNode) {
+	private MyBinaryTreeNode<T> getSuccessor(MyBinaryTreeNode<T> removingNode) {
 		
-		MyBinarySearchTreeNode<T> successorParrentNode = removingNode;
-		MyBinarySearchTreeNode<T> successorNode = removingNode;
-		MyBinarySearchTreeNode<T> currentNode = removingNode.getRightChildNode();
+		MyBinaryTreeNode<T> successorParrentNode = removingNode;
+		MyBinaryTreeNode<T> successorNode = removingNode;
+		MyBinaryTreeNode<T> currentNode = removingNode.getRightChildNode();
 		
 		while (currentNode != null) {
 			successorParrentNode = successorNode;
@@ -175,8 +173,7 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 	@Override
 	public boolean isTreeEmpty() {return root == null;}
 	
-	@Override
-	public void traversePreOrder(MyBinarySearchTreeNode<T> root) {
+	private void traversePreOrder(MyBinaryTreeNode<T> root) {
 		if (root != null) {
 			System.out.print(root.getData() + " ");
 			traversePreOrder(root.getLeftChildNode());
@@ -184,8 +181,7 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 		}
 	 }
 	
-	@Override
-	public void traverseInOrder(MyBinarySearchTreeNode<T> root) {
+	private void traverseInOrder(MyBinaryTreeNode<T> root) {
 		if (root != null) {
 			 traverseInOrder(root.getLeftChildNode());
 			 System.out.print(root.getData() + " ");
@@ -193,8 +189,7 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 		}
 	 }
 
-	@Override
-	public void traversePostOrder(MyBinarySearchTreeNode<T> root) {
+	private void traversePostOrder(MyBinaryTreeNode<T> root) {
 		if (root != null) {
 			 traversePostOrder(root.getLeftChildNode());
 			 traversePostOrder(root.getRightChildNode());
@@ -223,19 +218,19 @@ public class MyBinarySearchTree<T> implements IBinarySearchTree<T> {
 	 @Override
 	 public String toString() {
 		 StringBuilder sb = new StringBuilder("_________________________________________________________________\n\n");
-		 Stack<MyBinarySearchTreeNode<T>> globalStack = new Stack<MyBinarySearchTreeNode<T>>();
+		 Stack<MyBinaryTreeNode<T>> globalStack = new Stack<MyBinaryTreeNode<T>>();
 		 globalStack.push(root);
 		 int nBlanks = 32;
 		 boolean isRowEmpty = false;
 		 while (isRowEmpty == false) {
-			 Stack<MyBinarySearchTreeNode<T>> localStack = new Stack<MyBinarySearchTreeNode<T>>();
+			 Stack<MyBinaryTreeNode<T>> localStack = new Stack<MyBinaryTreeNode<T>>();
 			 isRowEmpty = true;
 			 for (int j = 0; j < nBlanks; j++)
 				 sb.append(' ');
 			 while (globalStack.isEmpty() == false) {
-				 MyBinarySearchTreeNode<T> temp = (MyBinarySearchTreeNode<T>) globalStack.pop();
+				 MyBinaryTreeNode<T> temp = (MyBinaryTreeNode<T>) globalStack.pop();
 				 if (temp != null) {
-					 sb.append(temp.getData());
+					 sb.append(temp.getKey());
 					 localStack.push(temp.getLeftChildNode());
 					 localStack.push(temp.getRightChildNode());
 					 if (temp.getLeftChildNode() != null || temp.getRightChildNode() != null)

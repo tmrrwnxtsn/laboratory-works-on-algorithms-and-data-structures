@@ -5,17 +5,10 @@ import java.io.InputStreamReader;
 /*
  * Основной класс, который запускается для просмотра реализации.
  */
-public class TreeApp {
+public class BinaryTreeApp {
 
 	public static void main(String[] args) throws IOException {
-		MyBinarySearchTree<Integer> theTree = new MyBinarySearchTree<Integer>();
-		
-		System.out.print("Сколько элементов добавить в дерево? Введите число от 1 до 20: ");
-		int numberElements = getInt();
-		for (int i = 0; i < numberElements; i++) {
-			theTree.insertNode(-100 + (int) (Math.random() * 200), -1000 + (int) (Math.random() * 2000));
-		}
-		System.out.println();
+		MyBinaryTree<Integer> theTree = new MyBinaryTree<Integer>();
 		 
 		int key, value;
 		while (true) {
@@ -39,7 +32,7 @@ public class TreeApp {
 			case 4:
 				System.out.print("Введите ключ: ");
 				key = getInt();
-				MyBinarySearchTreeNode<Integer> found = theTree.findNode(key);
+				MyBinaryTreeNode<Integer> found = theTree.findNode(key);
 				if (found != null) {
 					System.out.print("\nНайденное значение по ключу: ");
 					System.out.println(found.toString());
