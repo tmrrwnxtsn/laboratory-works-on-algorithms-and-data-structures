@@ -5,7 +5,7 @@ import java.util.Stack;
  */
 public class MyBinaryTree<T> implements IBinaryTree<T> {
 
-	private MyBinaryTreeNode<T> root;
+	public MyBinaryTreeNode<T> root;
 
 	@Override
 	public MyBinaryTreeNode<T> findNode(int key) {
@@ -173,7 +173,7 @@ public class MyBinaryTree<T> implements IBinaryTree<T> {
 	@Override
 	public boolean isTreeEmpty() {return root == null;}
 	
-	private void traversePreOrder(MyBinaryTreeNode<T> root) {
+	public void traversePreOrder(MyBinaryTreeNode<T> root) {
 		if (root != null) {
 			System.out.print(root.getData() + " ");
 			traversePreOrder(root.getLeftChildNode());
@@ -181,7 +181,7 @@ public class MyBinaryTree<T> implements IBinaryTree<T> {
 		}
 	 }
 	
-	private void traverseInOrder(MyBinaryTreeNode<T> root) {
+	public void traverseInOrder(MyBinaryTreeNode<T> root) {
 		if (root != null) {
 			 traverseInOrder(root.getLeftChildNode());
 			 System.out.print(root.getData() + " ");
@@ -189,7 +189,7 @@ public class MyBinaryTree<T> implements IBinaryTree<T> {
 		}
 	 }
 
-	private void traversePostOrder(MyBinaryTreeNode<T> root) {
+	public void traversePostOrder(MyBinaryTreeNode<T> root) {
 		if (root != null) {
 			 traversePostOrder(root.getLeftChildNode());
 			 traversePostOrder(root.getRightChildNode());
