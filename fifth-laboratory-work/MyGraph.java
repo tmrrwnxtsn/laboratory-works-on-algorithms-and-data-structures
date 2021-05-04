@@ -1,5 +1,5 @@
 /*
- * Класс графа, реализованного через матрицу смежности.
+ * Класс направленного (ориентированного) невзвешенного графа, реализованного через матрицу смежности.
  */
 public class MyGraph {
 
@@ -7,7 +7,6 @@ public class MyGraph {
 	private MyVertex arrayOfVertexes[];
 	private int adjacencyMatrix[][];
 	private int currentNumberOfVertexes;
-	private boolean isDirected;
 
 	public MyGraph(boolean isDirected) {
 		arrayOfVertexes = new MyVertex[MAX_NUMBER_OF_VERTEXES];
@@ -17,18 +16,14 @@ public class MyGraph {
 		for (int i = 0; i < MAX_NUMBER_OF_VERTEXES; i++)
 			for (int j = 0; j < MAX_NUMBER_OF_VERTEXES; j++)
 				adjacencyMatrix[i][j] = 0;
-
-		this.isDirected = isDirected;
 	}
 
 	public void addVertex(int vertexID) {
 		arrayOfVertexes[currentNumberOfVertexes++] = new MyVertex(vertexID);
 	}
 
-	public void addEdge(int start, int end, int edgeWeight) {
-		adjacencyMatrix[start][end] = edgeWeight;
-		if (!isDirected)
-			adjacencyMatrix[end][start] = edgeWeight;
+	public void addEdge(int start, int end) {
+		adjacencyMatrix[start][end] = 1;
 	}
 
 	public void displayVertex(int vertexIndex) {
@@ -43,106 +38,68 @@ public class MyGraph {
 		return -1;
 	}
 
-	// Обход графа в глубину
+	// Последовательный обход графа в глубину с каждой вершины
 	public void traverseInDepth() {
-		arrayOfVertexes[0].visitVertex(true);
-		displayVertex(0);
+		for (int vertexIndex = 0; vertexIndex < currentNumberOfVertexes; vertexIndex++) {
+			arrayOfVertexes[vertexIndex].visitVertex(true);
+			displayVertex(vertexIndex);
 
-		MyStack theStack = new MyStack();
-		theStack.push(0);
+			MyStack theStack = new MyStack();
+			theStack.push(vertexIndex);
 
-		while (!theStack.isEmpty()) {
-			// Получение непосещенной вершины, смежной к текущей
-			int indexOfAdjUnvisitedVertex = getAdjUnvisitedVertex(theStack.getTopElement());
+			while (!theStack.isEmpty()) {
+				// Получение непосещенной вершины, смежной к текущей
+				int indexOfAdjUnvisitedVertex = getAdjUnvisitedVertex(theStack.getTopElement());
 
-			if (indexOfAdjUnvisitedVertex == -1)
-				theStack.pop();
-			else {
-				arrayOfVertexes[indexOfAdjUnvisitedVertex].visitVertex(true);
-				displayVertex(indexOfAdjUnvisitedVertex);
-				theStack.push(indexOfAdjUnvisitedVertex);
+				if (indexOfAdjUnvisitedVertex == -1)
+					theStack.pop();
+				else {
+					arrayOfVertexes[indexOfAdjUnvisitedVertex].visitVertex(true);
+					displayVertex(indexOfAdjUnvisitedVertex);
+					theStack.push(indexOfAdjUnvisitedVertex);
+				}
 			}
-		}
 
-		// Сброс флагов
-		for (int i = 0; i < currentNumberOfVertexes; i++)
-			arrayOfVertexes[i].visitVertex(false);
+			// Сброс флагов
+			for (int i = 0; i < currentNumberOfVertexes; i++)
+				arrayOfVertexes[i].visitVertex(false);
+
+			System.out.println();
+		}
 	}
 
-	// Обход графа в ширину
-	public void traverseInWidth() {
-		arrayOfVertexes[0].visitVertex(true);
-		displayVertex(0);
-
-		MyQueue theQueue = new MyQueue();
-		theQueue.insert(0);
-
-		while (!theQueue.isEmpty()) {
-			int currentVertexIndex = theQueue.remove();
-
-			int neighborOfCurrentVertexIndex = getAdjUnvisitedVertex(currentVertexIndex);
-			// Пока остаются непосещенные соседи
-			while (neighborOfCurrentVertexIndex != -1) {
-				arrayOfVertexes[neighborOfCurrentVertexIndex].visitVertex(true);
-				displayVertex(neighborOfCurrentVertexIndex);
-				theQueue.insert(neighborOfCurrentVertexIndex);
-				neighborOfCurrentVertexIndex = getAdjUnvisitedVertex(currentVertexIndex);
-			}
-		}
-
-		// Сброс флагов
-		for (int i = 0; i < currentNumberOfVertexes; i++)
-			arrayOfVertexes[i].visitVertex(false);
-	}
-
-	// Алгоритм построения минимального оставного дерева через обход в глубину
-	public void buildMinimumSpanningTree() {
-		arrayOfVertexes[0].visitVertex(true);
-
-		MyStack theStack = new MyStack();
-		theStack.push(0);
-
-		while (!theStack.isEmpty()) {
-			int currentVertex = theStack.getTopElement();
-
-			// Получение непосещенной вершины, смежной к текущей
-			int indexOfAdjUnvisitedVertex = getAdjUnvisitedVertex(currentVertex);
-
-			if (indexOfAdjUnvisitedVertex == -1)
-				theStack.pop();
-			else {
-				arrayOfVertexes[indexOfAdjUnvisitedVertex].visitVertex(true);
-				theStack.push(indexOfAdjUnvisitedVertex);
-
-				// Вывод ребра от currentVertex к indexOfAdjUnvisitedVertex
-				displayVertex(currentVertex);
-				displayVertex(indexOfAdjUnvisitedVertex);
-				System.out.print(" ");
-			}
-		}
-
-		// Сброс флагов
-		for (int i = 0; i < currentNumberOfVertexes; i++)
-			arrayOfVertexes[i].visitVertex(false);
-	}
-
-	// Алгоритм Флойда-Уоршалла
+	// Алгоритм Флойда-Уоршалла (преобразование матрицы смежности в транзитивное
+	// замыкание графа)
 	public int[][] floydWarshallAlgorithm() {
-		int resultingMatrix[][] = new int[currentNumberOfVertexes][currentNumberOfVertexes];
+		int transitiveClosureOfGraph[][] = new int[currentNumberOfVertexes][currentNumberOfVertexes];
 
+		// Копируем матрицу смежности, чтобы построить видоизменённую матрицу смежности
+		// согласно данному алгоритму
 		for (int i = 0; i < currentNumberOfVertexes; i++)
 			for (int j = 0; j < currentNumberOfVertexes; j++)
-				resultingMatrix[i][j] = adjacencyMatrix[i][j];
+				transitiveClosureOfGraph[i][j] = adjacencyMatrix[i][j];
 
+		// Перебираем строки
 		for (int k = 0; k < currentNumberOfVertexes; k++)
+			// Перебираем все ячейки текущей строки
 			for (int i = 0; i < currentNumberOfVertexes; i++)
-				for (int j = 0; j < currentNumberOfVertexes; j++)
-					if (resultingMatrix[i][k] > 0 && resultingMatrix[k][j] > 0 && i != j)
-						if (resultingMatrix[i][k] + resultingMatrix[k][j] < resultingMatrix[i][j]
-								|| resultingMatrix[i][j] == 0)
-							resultingMatrix[i][j] = resultingMatrix[i][k] + resultingMatrix[k][j];
+				// Если в ячейке (i, k) обнаруживается 1, значит, в графе существует ребро от k
+				// к i
+				if (transitiveClosureOfGraph[i][k] == 1)
+					// Просматриваем ячейки в столбце k и ищем ребро, завершающееся в k
+					for (int j = 0; j < currentNumberOfVertexes; j++)
+						// Если элемент на пересечении столбца k со строкой j содержит 1, значит,
+						// существует ребро от j к k
+						if (transitiveClosureOfGraph[k][j] == 1)
+							// Из факта существования двух ребер — от j к k и от k к i — делается вывод о
+							// существовании пути от j к i
+							transitiveClosureOfGraph[i][j] = 1;
 
-		return resultingMatrix;
+		return transitiveClosureOfGraph;
+	}
+
+	public int[][] getAdjacencyMatrix() {
+		return adjacencyMatrix;
 	}
 
 	public void displayMatrix(int[][] matrix) {
