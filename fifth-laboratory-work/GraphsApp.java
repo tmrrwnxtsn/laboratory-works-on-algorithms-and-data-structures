@@ -1,8 +1,10 @@
-
-public class Main {
+/*
+ * Класс для работы с графами.
+ */
+public class GraphsApp {
 
 	public static void main(String[] args) {
-		MyGraph theGraph = new MyGraph(true);
+		MyDirectedGraph theGraph = new MyDirectedGraph(true);
 		theGraph.addVertex(0);
 		theGraph.addVertex(1);
 		theGraph.addVertex(2);

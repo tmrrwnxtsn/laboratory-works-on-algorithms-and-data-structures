@@ -1,14 +1,14 @@
 /*
  * Класс направленного (ориентированного) невзвешенного графа, реализованного через матрицу смежности.
  */
-public class MyGraph {
+public class MyDirectedGraph {
 
 	private final int MAX_NUMBER_OF_VERTEXES = 32;
 	private MyVertex arrayOfVertexes[];
 	private int adjacencyMatrix[][];
 	private int currentNumberOfVertexes;
 
-	public MyGraph(boolean isDirected) {
+	public MyDirectedGraph(boolean isDirected) {
 		arrayOfVertexes = new MyVertex[MAX_NUMBER_OF_VERTEXES];
 
 		adjacencyMatrix = new int[MAX_NUMBER_OF_VERTEXES][MAX_NUMBER_OF_VERTEXES];
