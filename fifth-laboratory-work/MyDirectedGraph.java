@@ -1,5 +1,7 @@
+import java.util.Stack;
+
 /*
- * Класс направленного (ориентированного) невзвешенного графа, реализованного через матрицу смежности.
+ * Класс ориентированного НЕвзвешенного графа, реализованного через матрицу смежности.
  */
 public class MyDirectedGraph {
 
@@ -8,11 +10,12 @@ public class MyDirectedGraph {
 	private int adjacencyMatrix[][];
 	private int currentNumberOfVertexes;
 
-	public MyDirectedGraph(boolean isDirected) {
+	public MyDirectedGraph() {
 		arrayOfVertexes = new MyVertex[MAX_NUMBER_OF_VERTEXES];
 
-		adjacencyMatrix = new int[MAX_NUMBER_OF_VERTEXES][MAX_NUMBER_OF_VERTEXES];
 		currentNumberOfVertexes = 0;
+
+		adjacencyMatrix = new int[MAX_NUMBER_OF_VERTEXES][MAX_NUMBER_OF_VERTEXES];
 		for (int i = 0; i < MAX_NUMBER_OF_VERTEXES; i++)
 			for (int j = 0; j < MAX_NUMBER_OF_VERTEXES; j++)
 				adjacencyMatrix[i][j] = 0;
@@ -26,35 +29,32 @@ public class MyDirectedGraph {
 		adjacencyMatrix[start][end] = 1;
 	}
 
-	public void displayVertex(int vertexIndex) {
-		System.out.print(arrayOfVertexes[vertexIndex].getVertexID());
-	}
-
 	// Метод возвращает непосещенную вершину, смежную по отношению к vertexIndex
 	private int getAdjUnvisitedVertex(int vertexIndex) {
 		for (int currentAdjVertex = 0; currentAdjVertex < currentNumberOfVertexes; currentAdjVertex++)
-			if (adjacencyMatrix[vertexIndex][currentAdjVertex] == 1 && !arrayOfVertexes[currentAdjVertex].wasVisited())
+			if (adjacencyMatrix[vertexIndex][currentAdjVertex] == 1 && !arrayOfVertexes[currentAdjVertex].isInTree())
 				return currentAdjVertex;
 		return -1;
 	}
 
-	// Последовательный обход графа в глубину с каждой вершины
 	public void traverseInDepth() {
-		for (int vertexIndex = 0; vertexIndex < currentNumberOfVertexes; vertexIndex++) {
-			arrayOfVertexes[vertexIndex].visitVertex(true);
-			displayVertex(vertexIndex);
+		System.out.println("Последовательный обход графа,");
+		for (int vertexNumber = 0; vertexNumber < currentNumberOfVertexes; vertexNumber++) {
+			System.out.print(" начиная с " + vertexNumber + ": ");
+			arrayOfVertexes[vertexNumber].setInTree(true);
+			displayVertex(vertexNumber);
 
-			MyStack theStack = new MyStack();
-			theStack.push(vertexIndex);
+			Stack<Integer> theStack = new Stack<Integer>();
+			theStack.push(vertexNumber);
 
 			while (!theStack.isEmpty()) {
 				// Получение непосещенной вершины, смежной к текущей
-				int indexOfAdjUnvisitedVertex = getAdjUnvisitedVertex(theStack.getTopElement());
+				int indexOfAdjUnvisitedVertex = getAdjUnvisitedVertex(theStack.peek());
 
 				if (indexOfAdjUnvisitedVertex == -1)
 					theStack.pop();
 				else {
-					arrayOfVertexes[indexOfAdjUnvisitedVertex].visitVertex(true);
+					arrayOfVertexes[indexOfAdjUnvisitedVertex].setInTree(true);
 					displayVertex(indexOfAdjUnvisitedVertex);
 					theStack.push(indexOfAdjUnvisitedVertex);
 				}
@@ -62,15 +62,14 @@ public class MyDirectedGraph {
 
 			// Сброс флагов
 			for (int i = 0; i < currentNumberOfVertexes; i++)
-				arrayOfVertexes[i].visitVertex(false);
+				arrayOfVertexes[i].setInTree(false);
 
 			System.out.println();
 		}
 	}
 
-	// Алгоритм Флойда-Уоршалла (преобразование матрицы смежности в транзитивное
-	// замыкание графа)
-	public int[][] floydWarshallAlgorithm() {
+	// Преобразование матрицы смежности в транзитивное замыкание графа
+	public int[][] warshallAlgorithm() {
 		int transitiveClosureOfGraph[][] = new int[currentNumberOfVertexes][currentNumberOfVertexes];
 
 		// Копируем матрицу смежности, чтобы построить видоизменённую матрицу смежности
@@ -97,17 +96,31 @@ public class MyDirectedGraph {
 
 		return transitiveClosureOfGraph;
 	}
-
+	
 	public int[][] getAdjacencyMatrix() {
 		return adjacencyMatrix;
 	}
 
 	public void displayMatrix(int[][] matrix) {
+		System.out.println("Матрица:");
+		System.out.print("   ");
+		for (int i = 0; i < currentNumberOfVertexes; i++)
+			System.out.print(i + " ");
+		System.out.println();
+		System.out.print(" |");
+		for (int i = 1; i < currentNumberOfVertexes; i++)
+			System.out.print("‾‾");
+		System.out.println("‾‾");
 		for (int i = 0; i < currentNumberOfVertexes; i++) {
-			System.out.println();
+			System.out.print(i + "| ");
 			for (int j = 0; j < currentNumberOfVertexes; j++)
-				System.out.print(matrix[i][j]);
+				System.out.print(matrix[i][j] + " ");
+			System.out.println();
 		}
 		System.out.println();
+	}
+
+	public void displayVertex(int vertexIndex) {
+		System.out.print(arrayOfVertexes[vertexIndex].getVertexNumber() + " ");
 	}
 }

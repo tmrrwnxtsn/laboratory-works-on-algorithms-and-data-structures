@@ -3,22 +3,23 @@
  */
 public class MyVertex {
 
-	private int vertexID;
-	private boolean wasVisited;
+	private int vertexNumber;
+	private boolean isInTree;
 
-	public MyVertex(int vertexID) {
-		this.vertexID = vertexID;
+	public MyVertex(int vertexNumber) {
+		this.vertexNumber = vertexNumber;
+		isInTree = false;
 	}
 
-	public int getVertexID() {
-		return vertexID;
+	public int getVertexNumber() {
+		return vertexNumber;
 	}
 
-	public boolean wasVisited() {
-		return wasVisited;
+	public boolean isInTree() {
+		return isInTree;
 	}
 
-	public void visitVertex(boolean flag) {
-		wasVisited = flag;
+	public void setInTree(boolean isInTree) {
+		this.isInTree = isInTree;
 	}
 }
