@@ -3,13 +3,13 @@
  */
 public class MyEdge {
 
-	private int startVertexIndex;
-	private int endVertexIndex;
+	private int startVertexNumber;
+	private int endVertexNumber;
 	private int distance;
 
-	public MyEdge(int startVertexIndex, int endVertexIndex, int distance) {
-		this.startVertexIndex = startVertexIndex;
-		this.endVertexIndex = endVertexIndex;
+	public MyEdge(int startVertexNumber, int endVertexNumber, int distance) {
+		this.startVertexNumber = startVertexNumber;
+		this.endVertexNumber = endVertexNumber;
 		this.distance = distance;
 	}
 
@@ -18,10 +18,10 @@ public class MyEdge {
 	}
 
 	public int getEndVertex() {
-		return endVertexIndex;
+		return endVertexNumber;
 	}
 
 	public int getStartVertex() {
-		return startVertexIndex;
+		return startVertexNumber;
 	}
 }

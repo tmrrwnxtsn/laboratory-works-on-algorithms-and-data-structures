@@ -8,10 +8,12 @@ public class GraphsApp {
 		theWeightedGraph.findMinimumSpanningTree(0);
 		theWeightedGraph.displayAdjacencyLists();
 
-		MyDirectedGraph theDirected = getDirectedGraph(3);
-		theDirected.traverseInDepth();
-		theDirected.displayMatrix(theDirected.getAdjacencyMatrix());
-		theDirected.displayMatrix(theDirected.warshallAlgorithm());
+		MyOrientedGraph theOrientedGraph = getOrientedGraph(3);
+		theOrientedGraph.traverseInDepth();
+		theOrientedGraph.displayMatrix(theOrientedGraph.getAdjacencyMatrix());
+		theOrientedGraph.displayMatrix(theOrientedGraph.warshallAlgorithm());
+		theOrientedGraph.getPathFromFirstVToSecondV(1, 6);
+		System.out.println(theOrientedGraph.isVertexNumberInGraph(9));
 
 	}
 
@@ -76,8 +78,8 @@ public class GraphsApp {
 		return theWeightedGraph;
 	}
 
-	public static MyDirectedGraph getDirectedGraph(int typeOfGraph) {
-		MyDirectedGraph theDirectedGraph = new MyDirectedGraph();
+	public static MyOrientedGraph getOrientedGraph(int typeOfGraph) {
+		MyOrientedGraph theDirectedGraph = new MyOrientedGraph();
 		switch (typeOfGraph) {
 		case 1:
 			theDirectedGraph.addVertex(0);
