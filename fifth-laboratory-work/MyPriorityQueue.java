@@ -34,12 +34,12 @@ public class MyPriorityQueue {
 		return pqArray[--currentPQSize];
 	}
 
-	public WeightedGraphEdge getEdgeByIndex(int index) {
-		return pqArray[index];
+	public WeightedGraphEdge getEdgeByIndex(int edgeIndex) {
+		return pqArray[edgeIndex];
 	}
 
-	public void removeEdgeByIndex(int index) {
-		for (int i = index; i < currentPQSize - 1; i++)
+	public void removeEdgeByIndex(int edgeIndex) {
+		for (int i = edgeIndex; i < currentPQSize - 1; i++)
 			pqArray[i] = pqArray[i + 1];
 		currentPQSize--;
 	}
