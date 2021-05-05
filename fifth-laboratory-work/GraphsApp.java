@@ -8,12 +8,12 @@ public class GraphsApp {
 		theWeightedGraph.findMinimumSpanningTree(4);
 		theWeightedGraph.displayConnectivityTable();
 
-//		OrientedGraph theOrientedGraph = getOrientedGraph(1);
-//		theOrientedGraph.traverseInDepth();
-//		theOrientedGraph.displayMatrix(theOrientedGraph.getAdjacencyMatrix());
-//		theOrientedGraph.displayMatrix(theOrientedGraph.warshallAlgorithm());
-//		theOrientedGraph.getPathFromFirstVToSecondV(1, 6);
-//		System.out.println(theOrientedGraph.isVertexNumberInGraph(9));
+		OrientedGraph theOrientedGraph = getOrientedGraph(1);
+		theOrientedGraph.traverseInDepth();
+		theOrientedGraph.displayMatrix(theOrientedGraph.getAdjacencyMatrix());
+		theOrientedGraph.displayMatrix(theOrientedGraph.warshallAlgorithm());
+		theOrientedGraph.getPathFromFirstVToSecondV(1, 6);
+		System.out.println(theOrientedGraph.isVertexNumberInGraph(9));
 
 	}
 
