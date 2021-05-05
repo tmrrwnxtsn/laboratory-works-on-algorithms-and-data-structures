@@ -1,13 +1,13 @@
 /*
  * Класс ребра графа.
  */
-public class Edge<T> {
+public class Edge {
 
-	private T startVertex;
-	private T endVertex;
+	private Vertex startVertex;
+	private Vertex endVertex;
 	private int distance;
 
-	public Edge(T startVertex, T endVertex, int distance) {
+	public Edge(Vertex startVertex, Vertex endVertex, int distance) {
 		this.startVertex = startVertex;
 		this.endVertex = endVertex;
 		this.distance = distance;
@@ -17,11 +17,11 @@ public class Edge<T> {
 		return distance;
 	}
 
-	public T getEndVertex() {
+	public Vertex getEndVertex() {
 		return endVertex;
 	}
 
-	public T getStartVertex() {
+	public Vertex getStartVertex() {
 		return startVertex;
 	}
 }
