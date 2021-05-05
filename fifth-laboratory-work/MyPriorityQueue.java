@@ -4,15 +4,15 @@
 public class MyPriorityQueue {
 
 	private final int SIZE = 32;
-	private MyEdge[] pqArray;
+	private WeightedGraphEdge[] pqArray;
 	private int currentPQSize;
 
 	public MyPriorityQueue() {
-		pqArray = new MyEdge[SIZE];
+		pqArray = new WeightedGraphEdge[SIZE];
 		currentPQSize = 0;
 	}
 
-	public void insertEdge(MyEdge theEdge) {
+	public void insertEdge(WeightedGraphEdge theEdge) {
 		int i;
 
 		for (i = 0; i < currentPQSize; i++)
@@ -26,15 +26,15 @@ public class MyPriorityQueue {
 		currentPQSize++;
 	}
 
-	public MyEdge getMinEdge() {
+	public WeightedGraphEdge getMinEdge() {
 		return pqArray[currentPQSize - 1];
 	}
 
-	public MyEdge removeMinEdge() {
+	public WeightedGraphEdge removeMinEdge() {
 		return pqArray[--currentPQSize];
 	}
 
-	public MyEdge getEdgeByIndex(int index) {
+	public WeightedGraphEdge getEdgeByIndex(int index) {
 		return pqArray[index];
 	}
 
@@ -44,9 +44,9 @@ public class MyPriorityQueue {
 		currentPQSize--;
 	}
 
-	public int findEdgeIndexByEndVertex(int endVertex) {
+	public int findEdgeIndexByEndVertex(int endVertexNumber) {
 		for (int i = 0; i < currentPQSize; i++)
-			if (pqArray[i].getEndVertex() == endVertex)
+			if (pqArray[i].getEndVertex().getVertexNumber() == endVertexNumber)
 				return i;
 		return -1;
 	}

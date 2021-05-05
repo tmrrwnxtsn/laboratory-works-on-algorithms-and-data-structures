@@ -4,20 +4,21 @@
 public class GraphsApp {
 
 	public static void main(String[] args) {
-		MyWeightedGraph theWeightedGraph = getWeightedGraph(1);
-		theWeightedGraph.findMinimumSpanningTree(3);
+		WeightedGraph theWeightedGraph = getWeightedGraph(1);
+		theWeightedGraph.findMinimumSpanningTree(4);
+		theWeightedGraph.displayConnectivityTable();
 
-		MyOrientedGraph theOrientedGraph = getOrientedGraph(1);
-		theOrientedGraph.traverseInDepth();
-		theOrientedGraph.displayMatrix(theOrientedGraph.getAdjacencyMatrix());
-		theOrientedGraph.displayMatrix(theOrientedGraph.warshallAlgorithm());
-		theOrientedGraph.getPathFromFirstVToSecondV(1, 6);
-		System.out.println(theOrientedGraph.isVertexNumberInGraph(9));
+//		OrientedGraph theOrientedGraph = getOrientedGraph(1);
+//		theOrientedGraph.traverseInDepth();
+//		theOrientedGraph.displayMatrix(theOrientedGraph.getAdjacencyMatrix());
+//		theOrientedGraph.displayMatrix(theOrientedGraph.warshallAlgorithm());
+//		theOrientedGraph.getPathFromFirstVToSecondV(1, 6);
+//		System.out.println(theOrientedGraph.isVertexNumberInGraph(9));
 
 	}
 
-	public static MyWeightedGraph getWeightedGraph(int typeOfGraph) {
-		MyWeightedGraph theWeightedGraph = new MyWeightedGraph();
+	public static WeightedGraph getWeightedGraph(int typeOfGraph) {
+		WeightedGraph theWeightedGraph = new WeightedGraph();
 		switch (typeOfGraph) {
 		case 1:
 			theWeightedGraph.addVertex(0);
@@ -77,8 +78,8 @@ public class GraphsApp {
 		return theWeightedGraph;
 	}
 
-	public static MyOrientedGraph getOrientedGraph(int typeOfGraph) {
-		MyOrientedGraph theDirectedGraph = new MyOrientedGraph();
+	public static OrientedGraph getOrientedGraph(int typeOfGraph) {
+		OrientedGraph theDirectedGraph = new OrientedGraph();
 		switch (typeOfGraph) {
 		case 1:
 			theDirectedGraph.addVertex(0);

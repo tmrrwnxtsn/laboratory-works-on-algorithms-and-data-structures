@@ -3,15 +3,15 @@ import java.util.Stack;
 /*
  * Класс ориентированного НЕвзвешенного графа, реализованного через матрицу смежности.
  */
-public class MyOrientedGraph {
+public class OrientedGraph {
 
 	private final int MAX_NUMBER_OF_VERTEXES = 32;
-	private MyVertex arrayOfVertexes[];
+	private OrientedGraphVertex arrayOfVertexes[];
 	private int adjacencyMatrix[][];
 	private int currentNumberOfVertexes;
 
-	public MyOrientedGraph() {
-		arrayOfVertexes = new MyVertex[MAX_NUMBER_OF_VERTEXES];
+	public OrientedGraph() {
+		arrayOfVertexes = new OrientedGraphVertex[MAX_NUMBER_OF_VERTEXES];
 
 		currentNumberOfVertexes = 0;
 
@@ -22,7 +22,7 @@ public class MyOrientedGraph {
 	}
 
 	public void addVertex(int vertexID) {
-		arrayOfVertexes[currentNumberOfVertexes++] = new MyVertex(vertexID);
+		arrayOfVertexes[currentNumberOfVertexes++] = new OrientedGraphVertex(vertexID);
 	}
 
 	public void addEdge(int start, int end) {
@@ -42,7 +42,7 @@ public class MyOrientedGraph {
 			return;
 		}
 
-		arrayOfVertexes[firstVertexNumber].setInTree(true);
+		arrayOfVertexes[firstVertexNumber].setWasVisited(true);
 
 		Stack<Integer> theStack = new Stack<Integer>();
 		theStack.push(firstVertexNumber);
@@ -59,7 +59,7 @@ public class MyOrientedGraph {
 			if (indexOfAdjUnvisitedVertex == -1)
 				theStack.pop();
 			else {
-				arrayOfVertexes[indexOfAdjUnvisitedVertex].setInTree(true);
+				arrayOfVertexes[indexOfAdjUnvisitedVertex].setWasVisited(true);
 				pathArray[elementsInPath++] = indexOfAdjUnvisitedVertex;
 				theStack.push(indexOfAdjUnvisitedVertex);
 				if (indexOfAdjUnvisitedVertex == secondVertexNumber)
@@ -69,7 +69,7 @@ public class MyOrientedGraph {
 
 		// Сброс флагов
 		for (int i = 0; i < currentNumberOfVertexes; i++)
-			arrayOfVertexes[i].setInTree(false);
+			arrayOfVertexes[i].setWasVisited(false);
 
 		if (isPathExist) {
 			System.out.println("Путь от " + firstVertexNumber + " до " + secondVertexNumber + ": ");
@@ -82,7 +82,8 @@ public class MyOrientedGraph {
 	// Метод возвращает непосещенную вершину, смежную по отношению к vertexIndex
 	private int getAdjUnvisitedVertex(int vertexIndex) {
 		for (int currentAdjVertex = 0; currentAdjVertex < currentNumberOfVertexes; currentAdjVertex++)
-			if (adjacencyMatrix[vertexIndex][currentAdjVertex] == 1 && !arrayOfVertexes[currentAdjVertex].isInTree())
+			if (adjacencyMatrix[vertexIndex][currentAdjVertex] == 1
+					&& !arrayOfVertexes[currentAdjVertex].isWasVisited())
 				return currentAdjVertex;
 		return -1;
 	}
@@ -91,7 +92,7 @@ public class MyOrientedGraph {
 		System.out.println("Последовательный обход графа,");
 		for (int vertexNumber = 0; vertexNumber < currentNumberOfVertexes; vertexNumber++) {
 			System.out.print(" начиная с " + vertexNumber + ": ");
-			arrayOfVertexes[vertexNumber].setInTree(true);
+			arrayOfVertexes[vertexNumber].setWasVisited(true);
 			displayVertex(vertexNumber);
 
 			Stack<Integer> theStack = new Stack<Integer>();
@@ -104,7 +105,7 @@ public class MyOrientedGraph {
 				if (indexOfAdjUnvisitedVertex == -1)
 					theStack.pop();
 				else {
-					arrayOfVertexes[indexOfAdjUnvisitedVertex].setInTree(true);
+					arrayOfVertexes[indexOfAdjUnvisitedVertex].setWasVisited(true);
 					displayVertex(indexOfAdjUnvisitedVertex);
 					theStack.push(indexOfAdjUnvisitedVertex);
 				}
@@ -112,7 +113,7 @@ public class MyOrientedGraph {
 
 			// Сброс флагов
 			for (int i = 0; i < currentNumberOfVertexes; i++)
-				arrayOfVertexes[i].setInTree(false);
+				arrayOfVertexes[i].setWasVisited(false);
 
 			System.out.println();
 		}
@@ -127,11 +128,20 @@ public class MyOrientedGraph {
 			for (int j = 0; j < currentNumberOfVertexes; j++)
 				transitiveClosureOfGraph[i][j] = adjacencyMatrix[i][j];
 
+		// Перебираем строки
 		for (int k = 0; k < currentNumberOfVertexes; k++)
+			// Перебираем все ячейки текущей строки
 			for (int i = 0; i < currentNumberOfVertexes; i++)
+				// Если в ячейке (i, k) обнаруживается 1, значит, в графе существует ребро от k
+				// к i
 				if (transitiveClosureOfGraph[i][k] == 1)
+					// Просматриваем ячейки в столбце k и ищем ребро, завершающееся в k
 					for (int j = 0; j < currentNumberOfVertexes; j++)
+						// Если элемент на пересечении столбца k со строкой j содержит 1, значит,
+						// существует ребро от j к k
 						if (transitiveClosureOfGraph[k][j] == 1)
+							// Из факта существования двух ребер — от j к k и от k к i — делается вывод о
+							// существовании пути от j к i
 							transitiveClosureOfGraph[i][j] = 1;
 
 		return transitiveClosureOfGraph;
