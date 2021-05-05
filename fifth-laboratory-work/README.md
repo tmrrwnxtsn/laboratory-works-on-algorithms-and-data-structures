@@ -8,11 +8,11 @@
 | Файл | Описание |
 |----:|:----|
 | Vertex.java | Вершина графа |
-| OrientedGraphVertex.java | Вершина ориентированного графа |
-| WeightedGraphVertex.java | Вершина взвешенного графа |
+| OrientedGraphVertex.java | Вершина ориентированного невзвешенного графа |
+| WeightedGraphVertex.java | Вершина взвешенного неориентированного графа |
 | Edge.java | Ребро графа |
-| WeightedGraphEdge.java | Ребро взвешенного графа |
-| OrientedGraph.java | Ориентированный граф |
-| WeightedGraph.java | Взвешенный граф |
+| WeightedGraphEdge.java | Ребро взвешенного неориентированного графа |
+| OrientedGraph.java | Ориентированный невзвешенный граф (через матрицу смежности) |
+| WeightedGraph.java | Взвешенный неориентированный граф (через списки смежности) |
 | MyPriorityQueue.java | Приоритетная очередь |
 | GraphsApp.java | Работа с графами |
