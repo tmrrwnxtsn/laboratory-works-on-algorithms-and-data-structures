@@ -5,10 +5,9 @@ public class GraphsApp {
 
 	public static void main(String[] args) {
 		MyWeightedGraph theWeightedGraph = getWeightedGraph(1);
-		theWeightedGraph.findMinimumSpanningTree(0);
-		theWeightedGraph.displayAdjacencyLists();
+		theWeightedGraph.findMinimumSpanningTree(3);
 
-		MyOrientedGraph theOrientedGraph = getOrientedGraph(3);
+		MyOrientedGraph theOrientedGraph = getOrientedGraph(1);
 		theOrientedGraph.traverseInDepth();
 		theOrientedGraph.displayMatrix(theOrientedGraph.getAdjacencyMatrix());
 		theOrientedGraph.displayMatrix(theOrientedGraph.warshallAlgorithm());

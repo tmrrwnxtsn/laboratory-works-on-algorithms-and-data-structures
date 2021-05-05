@@ -35,8 +35,6 @@ public class MyWeightedGraph {
 	}
 
 	public void putInPQ(int newVertex, int newDistance) {
-		// Существует ли другое ребро с той же конечной вершиной?
-		// Получение индекса
 		int pqIndex = thePQ.findEdgeIndexByEndVertex(newVertex);
 		// Если ребро существует, получить его
 		if (pqIndex != -1) {
@@ -44,16 +42,12 @@ public class MyWeightedGraph {
 			int oldDistance = tempEdge.getDistance();
 			// Если новое ребро короче
 			if (oldDistance > newDistance) {
-				// Удалить старое ребро
 				thePQ.removeEdgeByIndex(pqIndex);
 				MyEdge theEdge = new MyEdge(currentVertex, newVertex, newDistance);
-				// Вставка нового ребра
 				thePQ.insertEdge(theEdge);
 			}
-			// Иначе ничего не делается: оставляем старую вершину
 		} else { // Ребра с той же конечной вершиной не существует
 			MyEdge theEdge = new MyEdge(currentVertex, newVertex, newDistance);
-			// Вставка нового ребра
 			thePQ.insertEdge(theEdge);
 		}
 	}
@@ -105,7 +99,7 @@ public class MyWeightedGraph {
 		System.out.println("(Вес: " + minimumSpanningTreeWeight + ")");
 	}
 
-	public void displayAdjacencyLists() {
+	public void displayConnectivityTable() {
 		System.out.println("Списки смежности (вершина: смежные с ней вершины, написанные через пробел):");
 		for (int i = 0; i < currentNumberOfVertexes; i++) {
 			LinkedList<MyEdge> arrayOfAdjacentVertexesToI = adjLists[i];

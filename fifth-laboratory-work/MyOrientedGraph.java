@@ -122,26 +122,16 @@ public class MyOrientedGraph {
 	public int[][] warshallAlgorithm() {
 		int transitiveClosureOfGraph[][] = new int[currentNumberOfVertexes][currentNumberOfVertexes];
 
-		// Копируем матрицу смежности, чтобы построить видоизменённую матрицу смежности
-		// согласно данному алгоритму
+		// Копируем матрицу смежности, чтобы построить транзитивное замыкание графа
 		for (int i = 0; i < currentNumberOfVertexes; i++)
 			for (int j = 0; j < currentNumberOfVertexes; j++)
 				transitiveClosureOfGraph[i][j] = adjacencyMatrix[i][j];
 
-		// Перебираем строки
 		for (int k = 0; k < currentNumberOfVertexes; k++)
-			// Перебираем все ячейки текущей строки
 			for (int i = 0; i < currentNumberOfVertexes; i++)
-				// Если в ячейке (i, k) обнаруживается 1, значит, в графе существует ребро от k
-				// к i
 				if (transitiveClosureOfGraph[i][k] == 1)
-					// Просматриваем ячейки в столбце k и ищем ребро, завершающееся в k
 					for (int j = 0; j < currentNumberOfVertexes; j++)
-						// Если элемент на пересечении столбца k со строкой j содержит 1, значит,
-						// существует ребро от j к k
 						if (transitiveClosureOfGraph[k][j] == 1)
-							// Из факта существования двух ребер — от j к k и от k к i — делается вывод о
-							// существовании пути от j к i
 							transitiveClosureOfGraph[i][j] = 1;
 
 		return transitiveClosureOfGraph;
